@@ -1,0 +1,76 @@
+python -m venv fstv
+fstv\Scripts\activate
+source fstv/Scripts/activate
+
+rm blog.db
+
+uvicorn main:app --reload
+
+uvicorn main:app --reload
+
+python3 -m venv fstv
+source fstv/bin/activate
+
+source fstv/bin/activate
+nohup uvicorn main:app --host 127.0.0.1 --port 8000 &
+
+
+shippingbill
+cd /var/www/
+mkdir shippingbill
+cd shippingbill
+
+cd /var/www/fastapi-blog
+
+
+Step-by-Step: Deploy FastAPI Blog with Apache on Ubuntu
+1. Install Required Packages
+sudo apt update
+sudo apt install python3-pip python3-venv apache2 libapache2-mod-proxy-uwsgi
+Enable Apache proxy modules:
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod headers
+sudo systemctl restart apache2
+2. Set Up FastAPI App
+Upload or clone your app into /var/www/fastapi-blog
+sudo mkdir -p /var/www/fastapi-blog
+sudo chown $USER:$USER /var/www/fastapi-blog
+cd /var/www/fastapi-blog
+Set up virtual environment:
+python3 -m venv fstv
+source fstv/bin/activate
+pip install fastapi uvicorn jinja2 aiofiles sqlalchemy mysql-connector-python python-multipart python-slugify
+Start Uvicorn Server in Background
+source fstv/bin/activate
+nohup uvicorn main:app --host 127.0.0.1 --port 8000 &
+This makes FastAPI accessible on localhost:8000.
+4. Configure Apache Virtual Host
+Create a new Apache config:
+sudo nano /etc/apache2/sites-available/fastapi.conf
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName 138.2.104.204
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
+
+    ErrorLog ${APACHE_LOG_DIR}/fastapi_error.log
+    CustomLog ${APACHE_LOG_DIR}/fastapi_access.log combined
+</VirtualHost>
+
+
+
+#Enable the site:
+sudo a2ensite fastapi.conf
+sudo systemctl reload apache2
+5. Adjust Firewall (If Needed)
+sudo ufw allow 'Apache Full'
+Visit Your App
+http://your_server_ip/
+
+#Enable Apache Modules & Site
+sudo a2enmod proxy proxy_http
+sudo a2ensite fastapi.conf
+sudo systemctl reload apache2

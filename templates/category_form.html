@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Create Category | FastAPI Blog{% endblock %}
+
+{% block content %}
+  <h2>Add New Category</h2>
+  <form method="POST" action="/category">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="name" placeholder="Category Name" required>
+    </div>
+    <div class="mb-3">
+      <select class="form-select" name="status">
+        <option value="0">Draft</option>
+        <option value="1">Publish</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Create Category</button>
+  </form>
+  <br>
+  <a href="/" class="btn btn-link">← Back to Blog</a>
+{% endblock %}
